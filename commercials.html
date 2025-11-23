@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marco Farris - Commercial Work & Video Portfolio">
+    <title>Commercials - Marco Farris</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .commercials-page {
+            min-height: 100vh;
+            background-color: #000;
+            padding-top: 100px;
+        }
+        
+        .commercials-page-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem 2rem;
+        }
+        
+        .commercials-page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .commercials-page-subtitle {
+            font-size: 1rem;
+            color: #ccc;
+            letter-spacing: 2px;
+        }
+        
+        .commercials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 2rem;
+            padding: 0 3rem 4rem 3rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .commercial-item {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: #1a1a1a;
+            border-radius: 4px;
+        }
+        
+        .commercial-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .commercial-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.1);
+            transition: all var(--transition);
+        }
+        
+        .commercial-item:hover .commercial-play-overlay {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .commercial-play-icon {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all var(--transition);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        .commercial-item:hover .commercial-play-icon {
+            color: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+        
+        .commercial-item.playing .commercial-play-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .commercial-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: #fff;
+        }
+        
+        .commercial-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+        
+        .commercial-brand {
+            font-size: 0.85rem;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 968px) {
+            .commercials-page {
+                padding-top: 70px;
+            }
+            
+            .commercials-page-header {
+                padding: 2rem 1.5rem 2rem 1.5rem;
+            }
+            
+            .commercials-page-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+            
+            .commercials-page-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+            }
+            
+            .commercials-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                padding: 0 1.5rem 3rem 1.5rem;
+                gap: 1.5rem;
+            }
+            
+            .commercial-title {
+                font-size: 0.95rem;
+            }
+            
+            .commercial-brand {
+                font-size: 0.75rem;
+            }
+            
+            .commercial-info {
+                padding: 1rem;
+            }
+            
+            .commercial-play-icon {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .commercials-page {
+                padding-top: 60px;
+            }
+            
+            .commercials-page-header {
+                padding: 1.5rem 1rem 1.5rem 1rem;
+            }
+            
+            .commercials-page-title {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .commercials-page-subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .commercials-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem 2rem 1rem;
+                gap: 1rem;
+            }
+            
+            .commercial-title {
+                font-size: 0.85rem;
+            }
+            
+            .commercial-brand {
+                font-size: 0.7rem;
+            }
+            
+            .commercial-play-icon {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .commercials-page-title {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .commercials-page-subtitle {
+                font-size: 0.7rem;
+            }
+            
+            .commercial-title {
+                font-size: 0.8rem;
+            }
+            
+            .commercial-brand {
+                font-size: 0.65rem;
+            }
+            
+            .commercial-info {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Commercial video fullscreen overlay */
+        .commercial-video-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 1rem;
+        }
+
+        .commercial-fullscreen-video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .commercial-video-overlay .overlay-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition);
+        }
+
+        .commercial-video-overlay .overlay-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Commercial overlay navigation controls */
+        .commercial-video-overlay .overlay-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition);
+            user-select: none;
+        }
+
+        .commercial-video-overlay .overlay-prev {
+            left: 20px;
+        }
+
+        .commercial-video-overlay .overlay-next {
+            right: 20px;
+        }
+
+        .commercial-video-overlay .overlay-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .commercial-video-overlay .overlay-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Commercial video counter */
+        .commercial-video-overlay .overlay-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Mobile responsiveness for commercial overlay controls */
+        @media (max-width: 768px) {
+            .commercial-video-overlay {
+                padding: 0.5rem;
+            }
+            
+            .commercial-fullscreen-video {
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+            }
+            
+            .commercial-video-overlay .overlay-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .commercial-video-overlay .overlay-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .commercial-video-overlay .overlay-prev {
+                left: 15px;
+            }
+            
+            .commercial-video-overlay .overlay-next {
+                right: 15px;
+            }
+            
+            .commercial-video-overlay .overlay-counter {
+                bottom: 15px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="nav-top-bar nav-dark">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">M|F</a>
+            </div>
+            
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="portfolio.html" class="nav-link">PORTFOLIO</a></li>
+                    <li><a href="commercials.html" class="nav-link active">COMMERCIALS</a></li>
+                    <li><a href="fitness.html" class="nav-link">FITNESS</a></li>
+                    <li><a href="index.html#contact" class="nav-link">CONTACT</a></li>
+                </ul>
+                
+                <div class="nav-social">
+                    <a href="https://www.instagram.com/marcofarris" target="_blank" class="nav-instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Hamburger -->
+            <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <nav class="mobile-menu-nav">
+            <a href="index.html" class="mobile-menu-link">Home</a>
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
+            <a href="commercials.html" class="mobile-menu-link">Commercials</a>
+            <a href="fitness.html" class="mobile-menu-link">Fitness</a>
+            <a href="index.html#contact" class="mobile-menu-link">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Commercials Page Content -->
+    <section class="commercials-page">
+        <div class="commercials-page-header">
+            <h1 class="commercials-page-title">COMMERCIALS</h1>
+            <p class="commercials-page-subtitle">Brand Campaigns & Video Work</p>
+        </div>
+        
+        <div class="commercials-grid">
+            <div class="commercial-item">
+                <video playsinline muted loop controls webkit-playsinline>
+                    <source src="videos/commercial1.mov" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title"> 60's Italian love story - Commercial for HNB cosmetics</h3>
+                    <p class="commercial-brand">MARCO FARRIS</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop controls webkit-playsinline>
+                    <source src="videos/commercial2.mov" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Underwear Commercial for Van Heusen</h3>
+                    <p class="commercial-brand">MARCO FARRIS</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop controls webkit-playsinline>
+                    <source src="videos/commercial3.MOV" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Restaurant Commercial</h3>
+                    <p class="commercial-brand">MARCO FARRIS</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop controls webkit-playsinline>
+                    <source src="videos/commercial4.MP4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Watches Commercial</h3>
+                    <p class="commercial-brand">MARCO FARRIS</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop controls webkit-playsinline>
+                    <source src="videos/commercial5.mp4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Commercial Campaign 5</h3>
+                    <p class="commercial-brand">MARCO FARRIS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commercial Video Fullscreen Overlay -->
+    <div class="commercial-video-overlay" id="commercialVideoOverlay" style="display: none;">
+        <button class="overlay-close" id="commercialOverlayClose">×</button>
+        <button class="overlay-nav overlay-prev" id="commercialPrevBtn">‹</button>
+        <button class="overlay-nav overlay-next" id="commercialNextBtn">›</button>
+        <video class="commercial-fullscreen-video" id="commercialFullscreenVideo" controls playsinline>
+            <source src="" type="video/mp4">
+        </video>
+        <div class="overlay-counter" id="commercialCounter">
+            <span id="currentCommercialIndex">1</span> / <span id="totalCommercials">5</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="footer-content">
+            <p>&copy; 2025 Marco Farris. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Commercial video fullscreen functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const commercialItems = document.querySelectorAll('.commercial-item');
+            const commercialVideos = document.querySelectorAll('.commercial-item video');
+            const commercialVideoOverlay = document.getElementById('commercialVideoOverlay');
+            const commercialFullscreenVideo = document.getElementById('commercialFullscreenVideo');
+            const commercialOverlayClose = document.getElementById('commercialOverlayClose');
+            const commercialPrevBtn = document.getElementById('commercialPrevBtn');
+            const commercialNextBtn = document.getElementById('commercialNextBtn');
+            const currentCommercialIndex = document.getElementById('currentCommercialIndex');
+            const totalCommercials = document.getElementById('totalCommercials');
+            
+            let currentVideoIdx = 0;
+            let videoSources = [];
+            
+            // Collect all video sources
+            commercialVideos.forEach((video, index) => {
+                const videoSource = video.querySelector('source');
+                if (videoSource) {
+                    videoSources.push(videoSource.src);
+                }
+            });
+            
+            // Set total videos count
+            if (totalCommercials) {
+                totalCommercials.textContent = videoSources.length;
+            }
+            
+            // Function to load video at specific index
+            function loadVideoAtIndex(index) {
+                if (index >= 0 && index < videoSources.length && commercialFullscreenVideo) {
+                    const fullscreenSource = commercialFullscreenVideo.querySelector('source');
+                    if (fullscreenSource) {
+                        fullscreenSource.src = videoSources[index];
+                        commercialFullscreenVideo.load();
+                        commercialFullscreenVideo.play();
+                        
+                        // Update counter
+                        if (currentCommercialIndex) {
+                            currentCommercialIndex.textContent = index + 1;
+                        }
+                        
+                        currentVideoIdx = index;
+                    }
+                }
+            }
+            
+            // Add click handlers to commercial items for fullscreen
+            commercialItems.forEach((item, index) => {
+                const video = item.querySelector('video');
+                
+                item.addEventListener('click', function() {
+                    // Pause all videos first
+                    commercialVideos.forEach(v => {
+                        v.pause();
+                    });
+                    commercialItems.forEach(i => {
+                        i.classList.remove('playing');
+                    });
+                    
+                    // Always use custom overlay to maintain video format control
+                    if (commercialVideoOverlay) {
+                        commercialVideoOverlay.style.display = 'flex';
+                        loadVideoAtIndex(index);
+                    }
+                });
+            });
+            
+            // Previous video button
+            if (commercialPrevBtn) {
+                commercialPrevBtn.addEventListener('click', function() {
+                    const prevIndex = currentVideoIdx > 0 ? currentVideoIdx - 1 : videoSources.length - 1;
+                    loadVideoAtIndex(prevIndex);
+                });
+            }
+            
+            // Next video button
+            if (commercialNextBtn) {
+                commercialNextBtn.addEventListener('click', function() {
+                    const nextIndex = currentVideoIdx < videoSources.length - 1 ? currentVideoIdx + 1 : 0;
+                    loadVideoAtIndex(nextIndex);
+                });
+            }
+            
+            // Close overlay functionality
+            if (commercialOverlayClose && commercialVideoOverlay && commercialFullscreenVideo) {
+                commercialOverlayClose.addEventListener('click', function() {
+                    commercialVideoOverlay.style.display = 'none';
+                    commercialFullscreenVideo.pause();
+                    commercialFullscreenVideo.currentTime = 0;
+                });
+                
+                // Close overlay when clicking outside the video
+                commercialVideoOverlay.addEventListener('click', function(e) {
+                    if (e.target === commercialVideoOverlay) {
+                        commercialOverlayClose.click();
+                    }
+                });
+                
+                // Enhanced keyboard navigation for commercial fullscreen overlay
+                document.addEventListener('keydown', function(e) {
+                    if (commercialVideoOverlay.style.display === 'flex') {
+                        switch(e.key) {
+                            case 'Escape':
+                                commercialOverlayClose.click();
+                                break;
+                            case 'ArrowLeft':
+                                e.preventDefault();
+                                commercialPrevBtn.click();
+                                break;
+                            case 'ArrowRight':
+                                e.preventDefault();
+                                commercialNextBtn.click();
+                                break;
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marco Farris - Fitness & Training Videos">
+    <title>Fitness - Marco Farris</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .fitness-page {
+            min-height: 100vh;
+            background-color: var(--color-bg);
+            padding-top: 100px;
+        }
+        
+        .fitness-page-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem 2rem;
+        }
+        
+        .fitness-page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+        
+        .fitness-page-subtitle {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            letter-spacing: 2px;
+        }
+        
+        .fitness-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 3rem 4rem 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .fitness-grid-item {
+            aspect-ratio: 9/16;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: #000;
+            border-radius: 8px;
+        }
+        
+        .fitness-grid-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .fitness-grid-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            transition: all var(--transition);
+        }
+        
+        .fitness-grid-item:hover .fitness-grid-play-overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .fitness-grid-play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-text);
+            transition: transform var(--transition);
+        }
+        
+        .fitness-grid-item:hover .fitness-grid-play-icon {
+            transform: scale(1.1);
+        }
+        
+        .fitness-grid-item.playing .fitness-grid-play-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @media (max-width: 968px) {
+            .fitness-page {
+                padding-top: 70px;
+            }
+            
+            .fitness-page-header {
+                padding: 2rem 1.5rem 2rem 1.5rem;
+            }
+            
+            .fitness-page-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+            
+            .fitness-page-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+            }
+            
+            .fitness-grid-full {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                padding: 0 1.5rem 3rem 1.5rem;
+                gap: 1.5rem;
+            }
+            
+            .fitness-grid-play-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .fitness-page {
+                padding-top: 60px;
+            }
+            
+            .fitness-page-header {
+                padding: 1.5rem 1rem 1.5rem 1rem;
+            }
+            
+            .fitness-page-title {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .fitness-page-subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .fitness-grid-full {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                padding: 0 1rem 2rem 1rem;
+                gap: 1rem;
+            }
+            
+            .fitness-grid-play-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .fitness-page-title {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .fitness-page-subtitle {
+                font-size: 0.7rem;
+            }
+            
+            .fitness-grid-full {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="nav-top-bar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">M|F</a>
+            </div>
+            
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="portfolio.html" class="nav-link">PORTFOLIO</a></li>
+                    <li><a href="commercials.html" class="nav-link">COMMERCIALS</a></li>
+                    <li><a href="fitness.html" class="nav-link active">FITNESS</a></li>
+                    <li><a href="index.html#contact" class="nav-link">CONTACT</a></li>
+                </ul>
+                
+                <div class="nav-social">
+                    <a href="https://www.instagram.com/marcofarris" target="_blank" class="nav-instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Hamburger -->
+            <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <nav class="mobile-menu-nav">
+            <a href="index.html" class="mobile-menu-link">Home</a>
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
+            <a href="commercials.html" class="mobile-menu-link">Commercials</a>
+            <a href="fitness.html" class="mobile-menu-link">Fitness</a>
+            <a href="index.html#contact" class="mobile-menu-link">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Fitness Page Content -->
+    <section class="fitness-page">
+        <div class="fitness-page-header">
+            <h1 class="fitness-page-title">FITNESS</h1>
+            <p class="fitness-page-subtitle">Training & Workout Routines</p>
+        </div>
+        
+        <div class="fitness-grid-full">
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/fitness1.mov" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+            
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/fitness2.MOV" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+            
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/fitness3.MOV" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+            
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/fitness4.mov" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+            
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/fitness5.mov" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+            
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/fitness6.MOV" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+            
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/fitness7.mov" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+            
+            <div class="fitness-grid-item">
+                <video playsinline muted loop>
+                    <source src="Fitness/IMG_2164.mov" type="video/mp4">
+                </video>
+                <div class="fitness-grid-play-overlay">
+                    <div class="fitness-grid-play-icon">▶</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="footer-content">
+            <p>&copy; 2025 Marco Farris. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Fitness video click-to-play
+        const fitnessGridItems = document.querySelectorAll('.fitness-grid-item');
+        
+        fitnessGridItems.forEach(item => {
+            const video = item.querySelector('video');
+            
+            item.addEventListener('click', function() {
+                // Pause all other videos
+                fitnessGridItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherVideo = otherItem.querySelector('video');
+                        if (otherVideo && !otherVideo.paused) {
+                            otherVideo.pause();
+                            otherItem.classList.remove('playing');
+                        }
+                    }
+                });
+                
+                // Toggle current video
+                if (video.paused) {
+                    video.play();
+                    item.classList.add('playing');
+                } else {
+                    video.pause();
+                    item.classList.remove('playing');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

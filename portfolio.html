@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marco Farris - Portfolio Gallery">
+    <title>Portfolio - Marco Farris</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .portfolio-page {
+            min-height: 100vh;
+            /* Light grey background */
+            background-color: #F2F2F2;
+            padding-top: 100px;
+        }
+        
+        .portfolio-page-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem 2rem;
+        }
+        
+        .portfolio-page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+        
+        .portfolio-page-subtitle {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            letter-spacing: 2px;
+        }
+        
+        .portfolio-grid-full {
+            display: block;
+            column-count: 4;
+            column-gap: 0.25rem;
+            padding: 0 3rem 4rem 3rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-grid-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 0.25rem;
+            break-inside: avoid;
+            position: relative;
+            cursor: pointer;
+            transition: transform var(--transition);
+        }
+        
+        .portfolio-grid-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .portfolio-grid-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0;
+            background: linear-gradient(135deg, #e8dcc8 0%, #d4c5b0 100%);
+            display: block;
+        }
+        
+        @media (max-width: 968px) {
+            .portfolio-page {
+                padding-top: 70px;
+            }
+            
+            .portfolio-page-header {
+                padding: 2rem 1.5rem 2rem 1.5rem;
+            }
+            
+            .portfolio-page-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+            
+            .portfolio-page-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+            }
+            
+            .portfolio-grid-full {
+                column-count: 3;
+                padding: 0 1.5rem 3rem 1.5rem;
+                column-gap: 0.2rem;
+            }
+            
+            .portfolio-grid-item {
+                margin-bottom: 0.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-page {
+                padding-top: 60px;
+            }
+            
+            .portfolio-page-header {
+                padding: 1.5rem 1rem 1.5rem 1rem;
+            }
+            
+            .portfolio-page-title {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .portfolio-page-subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .portfolio-grid-full {
+                display: block;
+                column-count: 2;
+                column-gap: 0.15rem;
+                padding: 0 1rem 2rem 1rem;
+            }
+            
+            .portfolio-grid-item {
+                display: inline-block;
+                width: 100%;
+                margin-bottom: 0.15rem;
+                break-inside: avoid;
+            }
+            
+            .portfolio-grid-item:hover {
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-page-title {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .portfolio-page-subtitle {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Portfolio image fullscreen overlay */
+        .portfolio-image-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 2rem;
+        }
+
+        .portfolio-fullscreen-image {
+            max-width: 98%;
+            max-height: 98%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .portfolio-image-overlay .overlay-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-image-overlay .overlay-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Portfolio overlay navigation controls */
+        .portfolio-image-overlay .overlay-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .portfolio-image-overlay .overlay-prev {
+            left: 20px;
+        }
+
+        .portfolio-image-overlay .overlay-next {
+            right: 20px;
+        }
+
+        .portfolio-image-overlay .overlay-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .portfolio-image-overlay .overlay-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Portfolio image counter */
+        .portfolio-image-overlay .overlay-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Mobile responsiveness for portfolio overlay controls */
+        @media (max-width: 768px) {
+            .portfolio-image-overlay .overlay-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .portfolio-image-overlay .overlay-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .portfolio-image-overlay .overlay-prev {
+                left: 15px;
+            }
+            
+            .portfolio-image-overlay .overlay-next {
+                right: 15px;
+            }
+            
+            .portfolio-image-overlay .overlay-counter {
+                bottom: 15px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="nav-top-bar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">M|F</a>
+            </div>
+            
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="portfolio.html" class="nav-link active">PORTFOLIO</a></li>
+                    <li><a href="commercials.html" class="nav-link">COMMERCIALS</a></li>
+                    <li><a href="fitness.html" class="nav-link">FITNESS</a></li>
+                    <li><a href="index.html#contact" class="nav-link">CONTACT</a></li>
+                </ul>
+                
+                <div class="nav-social">
+                    <a href="https://www.instagram.com/marcofarris" target="_blank" class="nav-instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Hamburger -->
+            <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <nav class="mobile-menu-nav">
+            <a href="index.html" class="mobile-menu-link">Home</a>
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
+            <a href="commercials.html" class="mobile-menu-link">Commercials</a>
+            <a href="fitness.html" class="mobile-menu-link">Fitness</a>
+            <a href="index.html#contact" class="mobile-menu-link">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Portfolio Page Content -->
+    <section class="portfolio-page">
+        <div class="portfolio-page-header">
+            <h1 class="portfolio-page-title">PORTFOLIO</h1>
+            <p class="portfolio-page-subtitle">Editorial & Campaign Work</p>
+        </div>
+        
+        <div class="portfolio-grid-full">
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage1-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage2-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage3-min.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage4-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage5-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage6 copy-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage7-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage8-min.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage9-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage10-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage11-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage12-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage13-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage14-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/homepage15-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/055FF78A-F6ED-4E07-AF1E-28A88E182D55-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/081A2320-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/081A2415-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/081A2662_1-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/081A2839-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/081A2871-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/081A2891_1-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/081A2965-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/0E2DF459-CB2B-4989-9C23-59022D71121A-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/1d98e4c4-58b5-43de-a4b4-2bd4b3eba40c-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/2884828F-32A6-4F1A-90BB-E37A848F211C.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/28AE5A52-2AD9-49CE-BCA3-200EE93EE5E1-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/2DDC3EA3-0BA3-4A7C-BEE1-4568B2103A40-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/3-10-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/40A684C2-35E0-4CD8-A13A-F839112847E7-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/4AA6CB1F-1241-48D6-A2A3-477251E80652-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/4CD2F242-E1D6-42C4-BC8D-890DC4746803-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/70261EEC-F410-48A2-AA4A-5B20D7ADB59B.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/76789.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/7905964B-9B9D-4C2D-86DF-6CE2E5161BD1.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/808E9E42-9789-4ABD-8D61-2B2A520C5DB7.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/85B88E2D-85B7-40DD-AD92-985D6A9AEB37-min.JPG" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/878437945.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/8A812F2E-D386-415F-BE32-F727C9804140-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/A4DFA2B5-26D8-49A1-8EB8-1E96AED117B0.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/AFA2B8D6-6D4F-4053-9D56-F668C433E0BC.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/C343C2D6-753F-4FD0-84A4-67297D355FD0.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/DD5BF477-2EC1-4BD4-91B2-DBE4EA0E8323.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/E447A8D2-2182-499F-9E0F-DA0EFFBED8CA.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/E63E7B9D-4126-4363-BBE7-4561C88BC2C3.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/EBAF0BB4-EE73-492B-B1BA-33779C7EC601.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/F20FAC16-2C09-42D0-AC1D-AF23DA8EEB25.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0359.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0410.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0412.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0419.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0427.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0428.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0922.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0923.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0924.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0927.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0929.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0930.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0936.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0937.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0956.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0967.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0970.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0972.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0978.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_0981.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_1306.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_1508.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_2593.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_2595.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_2600.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_3882.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_3915.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_3916.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_3917.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_4214.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_4221.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_4320.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_4321.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_6689.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7536.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7633.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7638.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7649.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7652.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7666.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7669.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7673 (1).jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7673 (2).jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7673.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7675.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7688.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7692.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7692.jpg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7693.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7782.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7813.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7816.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7817.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7832.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7856.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_7857.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8709.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8710.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8725.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8761.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8763.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8765.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8794.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8816.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8817.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8821.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8826.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8827.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8830-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8831-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8834-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8840-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8850-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8852-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8853-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8854-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8863-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8865-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8897-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8899-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8909-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_8910-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9268-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9270-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9277-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9278-min.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9280.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9281.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9284 (1).jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9286 (1).jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9392.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9393.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9394.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/IMG_9403 (1).jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-081.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-087.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-087_(2).jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-105_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-139_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-140_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-158_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-166_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-177_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-179_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-184_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-218.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-254_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-287_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-293_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-339.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Marco-251024-412_(2)-2.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/Single Page37.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/ec289e15-7144-41d6-ad8b-026353bb0119.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/hero.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/swa00125.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/swa01587.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/swa02398.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="portfolio page/swa02444.jpeg" alt="Marco Farris Portfolio" loading="lazy">
+            </div>
+            <div class="portfolio-grid-item">
+                <img src="homepage images/beach-portrait.jpg" alt="Marco Farris Beach Portrait" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Image Fullscreen Overlay -->
+    <div class="portfolio-image-overlay" id="portfolioImageOverlay" style="display: none;">
+        <button class="overlay-close" id="portfolioOverlayClose">×</button>
+        <button class="overlay-nav overlay-prev" id="portfolioPrevBtn">‹</button>
+        <button class="overlay-nav overlay-next" id="portfolioNextBtn">›</button>
+        <img class="portfolio-fullscreen-image" id="portfolioFullscreenImage" src="" alt="">
+        <div class="overlay-counter" id="portfolioCounter">
+            <span id="currentPortfolioIndex">1</span> / <span id="totalPortfolioImages">140</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="footer-content">
+            <p>&copy; 2025 Marco Farris. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Portfolio image fullscreen functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const portfolioImages = document.querySelectorAll('.portfolio-grid-item img');
+            const portfolioImageOverlay = document.getElementById('portfolioImageOverlay');
+            const portfolioFullscreenImage = document.getElementById('portfolioFullscreenImage');
+            const portfolioOverlayClose = document.getElementById('portfolioOverlayClose');
+            const portfolioPrevBtn = document.getElementById('portfolioPrevBtn');
+            const portfolioNextBtn = document.getElementById('portfolioNextBtn');
+            const currentPortfolioIndex = document.getElementById('currentPortfolioIndex');
+            const totalPortfolioImages = document.getElementById('totalPortfolioImages');
+            
+            let currentImageIdx = 0;
+            let imageSources = [];
+            
+            // Collect all image sources
+            portfolioImages.forEach((image, index) => {
+                imageSources.push({
+                    src: image.src,
+                    alt: image.alt
+                });
+            });
+            
+            // Set total images count
+            if (totalPortfolioImages) {
+                totalPortfolioImages.textContent = imageSources.length;
+            }
+            
+            // Function to load image at specific index
+            function loadImageAtIndex(index) {
+                if (index >= 0 && index < imageSources.length && portfolioFullscreenImage) {
+                    portfolioFullscreenImage.src = imageSources[index].src;
+                    portfolioFullscreenImage.alt = imageSources[index].alt;
+                    
+                    // Update counter
+                    if (currentPortfolioIndex) {
+                        currentPortfolioIndex.textContent = index + 1;
+                    }
+                    
+                    currentImageIdx = index;
+                }
+            }
+            
+            // Add click handlers to portfolio images
+            portfolioImages.forEach((image, index) => {
+                image.addEventListener('click', function() {
+                    // Show the overlay and load the clicked image
+                    if (portfolioImageOverlay) {
+                        portfolioImageOverlay.style.display = 'flex';
+                        loadImageAtIndex(index);
+                    }
+                });
+            });
+            
+            // Previous image button
+            if (portfolioPrevBtn) {
+                portfolioPrevBtn.addEventListener('click', function() {
+                    const prevIndex = currentImageIdx > 0 ? currentImageIdx - 1 : imageSources.length - 1;
+                    loadImageAtIndex(prevIndex);
+                });
+            }
+            
+            // Next image button
+            if (portfolioNextBtn) {
+                portfolioNextBtn.addEventListener('click', function() {
+                    const nextIndex = currentImageIdx < imageSources.length - 1 ? currentImageIdx + 1 : 0;
+                    loadImageAtIndex(nextIndex);
+                });
+            }
+            
+            // Close overlay functionality
+            if (portfolioOverlayClose && portfolioImageOverlay) {
+                portfolioOverlayClose.addEventListener('click', function() {
+                    portfolioImageOverlay.style.display = 'none';
+                });
+                
+                // Close overlay when clicking outside the image
+                portfolioImageOverlay.addEventListener('click', function(e) {
+                    if (e.target === portfolioImageOverlay) {
+                        portfolioOverlayClose.click();
+                    }
+                });
+                
+                // Enhanced keyboard navigation for portfolio fullscreen overlay
+                document.addEventListener('keydown', function(e) {
+                    if (portfolioImageOverlay.style.display === 'flex') {
+                        switch(e.key) {
+                            case 'Escape':
+                                portfolioOverlayClose.click();
+                                break;
+                            case 'ArrowLeft':
+                                e.preventDefault();
+                                portfolioPrevBtn.click();
+                                break;
+                            case 'ArrowRight':
+                                e.preventDefault();
+                                portfolioNextBtn.click();
+                                break;
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

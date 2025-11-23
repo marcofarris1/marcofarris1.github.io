@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marco Farris - Professional Fashion, Commercial, Fitness & Lifestyle Model">
+    <title>Marco Farris | Model Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Embla Carousel CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/embla-carousel@8.3.1/embla-carousel.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ========================================
+         NAVIGATION BAR
+         Anna Barshevska style
+    ========================================= -->
+    <nav class="nav-top-bar nav-transparent">
+        <div class="nav-container">
+            <!-- Logo with underline -->
+            <div class="nav-logo">
+                <a href="index.html">M|F</a>
+            </div>
+            
+            <!-- Right side: Menu + Instagram -->
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="portfolio.html" class="nav-link">PORTFOLIO</a></li>
+                    <li><a href="commercials.html" class="nav-link">COMMERCIALS</a></li>
+                    <li><a href="fitness.html" class="nav-link">FITNESS</a></li>
+                    <li><a href="#contact" class="nav-link">CONTACT</a></li>
+                </ul>
+                
+                <div class="nav-social">
+                    <a href="https://www.instagram.com/marcofarris" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Hamburger -->
+            <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         MOBILE MENU
+    ========================================= -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <nav class="mobile-menu-nav">
+            <a href="index.html" class="mobile-menu-link">Home</a>
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
+            <a href="commercials.html" class="mobile-menu-link">Commercials</a>
+            <a href="fitness.html" class="mobile-menu-link">Fitness</a>
+            <a href="#contact" class="mobile-menu-link">Contact</a>
+        </nav>
+        <!-- Social links fixed to the bottom of the mobile menu -->
+        <div class="mobile-menu-social">
+            <a href="https://www.instagram.com/marcofarris" target="_blank" rel="noopener noreferrer" class="mobile-social-link" aria-label="Instagram">Instagram</a>
+            <a href="https://www.tiktok.com/@marcofarris" target="_blank" rel="noopener noreferrer" class="mobile-social-link" aria-label="TikTok">TikTok</a>
+            <a href="mailto:booking@marcofarris.com" class="mobile-social-link" aria-label="Email">Email</a>
+        </div>
+    </div>
+
+    <!-- ========================================
+         DESKTOP HERO SECTION - ALEXANDER LAYOUT
+         Desktop only (1024px+)
+    ========================================= -->
+    <section class="hero-alexander" id="home-desktop">
+        <div class="hero-container">
+            <!-- Left: Full editorial image -->
+            <div class="hero-left-image">
+                <img src="homepage images/hero-beach.jpeg" alt="Marco Farris Editorial" class="hero-main-img">
+            </div>
+            
+            <!-- Right: Content area -->
+            <div class="hero-right-area">
+                <!-- Bottom right: Portrait image -->
+                <div class="hero-portrait">
+                    <img src="homepage images/hero-studio.jpeg" alt="Marco Farris Portrait" class="hero-portrait-img">
+                </div>
+            </div>
+            
+            <!-- Center: HUGE overlaying name -->
+            <div class="hero-name-overlay">
+                <h1 class="hero-name-large">MARCO FARRIS</h1>
+                <p class="hero-subtitle-desktop"> Model · Fashion · Commercial · Fitness · Lifestyle 
+                    <br><br>
+                    <br>Based in LONDON, UK<br>
+                </p>
+            </div>
+            
+            <!-- Scroll indicator - moved to bottom center of entire section -->
+            <div class="scroll-indicator">
+                <svg width="24" height="60" viewBox="0 0 24 60" fill="none">
+                    <line x1="12" y1="0" x2="12" y2="45" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M12 55L7 50M12 55L17 50" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </div>
+            
+            <!-- Fitness Coaching Call to Action -->
+            <div class="fitness-cta">
+                <a href="fitness.html" class="fitness-coaching-link">FITNESS COACHING</a>
+            </div>
+            
+            <!-- Background watermark number -->
+            <div class="hero-watermark">01</div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         HERO SECTION - CINEMATIC BLACK
+         Fullscreen video background from cinematic version
+    ========================================= -->
+    <section class="hero-cinematic hero-section" id="home">
+        <!-- Background Image -->
+        <div class="hero-image">
+            <img src="./hero.jpeg" class="hero-img-bg" alt="">
+        </div>
+        
+        <!-- Dark overlay -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">MARCO FARRIS</h1>
+            <p class="hero-subtitle">Model · Fashion · Commercial · Fitness · Lifestyle · 
+                <br><br>
+                <br>Based in LONDON, UK<br>
+            </p></div>
+    
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+<!-- ========================================
+         GALLERY SECTION - EMBLA CAROUSEL
+         Infinite looping carousel with smooth transitions
+    ========================================= -->
+    <section class="gallery-section" id="portfolio">
+        <div class="gallery-header">
+            <h2 class="gallery-title">Portfolio</h2>
+            <a href="portfolio.html" class="view-all-link">VIEW ALL →</a>
+        </div>
+        
+        <section class="embla">
+            <div class="embla__viewport">
+                <div class="embla__container">
+                    <div class="embla__slide">
+                        <img src="homepage images/beach-portrait.jpg" alt="Marco Farris Beach Portrait" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage1-min.jpeg" alt="Marco Farris Portfolio 1" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage2-min.jpeg" alt="Marco Farris Portfolio 2" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage3-min.jpg" alt="Marco Farris Portfolio 3" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage4-min.jpeg" alt="Marco Farris Portfolio 4" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage5-min.jpeg" alt="Marco Farris Portfolio 5" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage6 copy-min.jpeg" alt="Marco Farris Portfolio 6" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage7-min.jpeg" alt="Marco Farris Portfolio 7" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage8-min.jpg" alt="Marco Farris Portfolio 8" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage9-min.jpeg" alt="Marco Farris Portfolio 9" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage10-min.jpeg" alt="Marco Farris Portfolio 10" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage11-min.jpeg" alt="Marco Farris Portfolio 11" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage12-min.jpeg" alt="Marco Farris Portfolio 12" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage13-min.jpeg" alt="Marco Farris Portfolio 13" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage14-min.jpeg" alt="Marco Farris Portfolio 14" loading="lazy">
+                    </div>
+                    <div class="embla__slide">
+                        <img src="homepage images/homepage15-min.jpeg" alt="Marco Farris Portfolio 15" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- ========================================
+         VIDEO SHOWCASE SECTION
+         Full-width with CTA button from reference
+    ========================================= -->
+    <section class="video-showcase" id="commercials">
+        <div class="video-header">
+            <h2 class="video-title">Commercials</h2>
+            <a href="commercials.html" class="view-all-link">VIEW ALL →</a>
+        </div>
+        
+        <video class="showcase-video" id="showcaseVideo" autoplay muted loop playsinline>
+            <source src="videos/commercial1.mov" type="video/mp4">
+        </video>
+        
+        <!-- Video Overlay with CTA -->
+        <div class="video-overlay">
+            <a href="commercials.html" class="video-cta-button">
+                <span class="corner corner-tl"></span>
+                <span class="corner corner-tr"></span>
+                <span class="corner corner-bl"></span>
+                <span class="corner corner-br"></span>
+                <span class="button-text">SEE ALL COMMERCIALS</span>
+            </a>
+        </div>
+        
+        <!-- Play/Pause Controls -->
+        <div class="video-controls">
+            <button class="video-play-pause" id="videoToggle" aria-label="Play/Pause video"></button>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FITNESS SECTION
+         Horizontal scrolling vertical videos from reference
+    ========================================= -->
+    <section class="fitness-section" id="fitness">
+        <div class="fitness-header">
+            <h2 class="fitness-title">FITNESS</h2>
+            <a href="fitness.html" class="view-all-link">VIEW ALL →</a>
+        </div>
+        
+        <section class="embla embla--fitness">
+            <div class="embla__viewport">
+                <div class="embla__container">
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/fitness1.mov" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/fitness2.MOV" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/fitness3.MOV" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/fitness4.mov" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/fitness5.mov" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/fitness6.MOV" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/fitness7.mov" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                    <div class="embla__slide">
+                        <video playsinline muted loop autoplay>
+                            <source src="Fitness/IMG_2164.mov" type="video/mp4">
+                        </video>
+                        <div class="fitness-play-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Fitness Video Fullscreen Overlay -->
+    <div class="fitness-video-overlay" id="fitnessVideoOverlay" style="display: none;">
+        <button class="overlay-close" id="fitnessOverlayClose">×</button>
+        <button class="overlay-nav overlay-prev" id="fitnessPrevBtn">‹</button>
+        <button class="overlay-nav overlay-next" id="fitnessNextBtn">›</button>
+        <video class="fitness-fullscreen-video" id="fitnessFullscreenVideo" controls playsinline>
+            <source src="" type="video/mp4">
+        </video>
+        <div class="overlay-counter" id="fitnessCounter">
+            <span id="currentVideoIndex">1</span> / <span id="totalVideos">8</span>
+        </div>
+    </div>
+
+    <!-- Gallery Image Fullscreen Overlay -->
+    <div class="gallery-image-overlay" id="galleryImageOverlay" style="display: none;">
+        <button class="overlay-close" id="galleryOverlayClose">×</button>
+        <button class="overlay-nav overlay-prev" id="galleryPrevBtn">‹</button>
+        <button class="overlay-nav overlay-next" id="galleryNextBtn">›</button>
+        <img class="gallery-fullscreen-image" id="galleryFullscreenImage" src="" alt="">
+        <div class="overlay-counter" id="galleryCounter">
+            <span id="currentImageIndex">1</span> / <span id="totalImages">8</span>
+        </div>
+    </div>
+
+    <!-- ========================================
+         CONTACT SECTION
+         Clean form from reference
+    ========================================= -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title">GET IN TOUCH</h2>
+            <p class="contact-subtitle">Available for bookings and collaborations worldwide</p>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name *" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email *" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="company" placeholder="Company / Agency">
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="6" placeholder="Your Message *" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">SEND MESSAGE</button>
+            </form>
+            
+            <div class="contact-social">
+                <a href="https://www.instagram.com/marcofarris" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+                <a href="https://www.tiktok.com/@marcofarris" target="_blank" rel="noopener noreferrer" class="social-link">TIKTOK</a>
+                <a href="mailto:booking@marcofarris.com" class="social-link">EMAIL</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Marco Farris. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <!-- Embla Carousel JS -->
+    <script src="https://unpkg.com/embla-carousel@8.3.1/embla-carousel.umd.js"></script>
+    <script src="https://unpkg.com/embla-carousel-autoplay@8.3.1/embla-carousel-autoplay.umd.js"></script>
+    
+    <!-- Include scripts -->
+    <script src="scripts.js"></script>
+    <script src="embla-carousel.js"></script>
+</body>
+</html>
+
+</body>
+</html>

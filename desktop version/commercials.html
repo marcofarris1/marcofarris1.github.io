@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marco Farris - Commercial Work & Video Portfolio">
+    <title>Commercials - Marco Farris</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles-alexander.css">
+    <style>
+        .commercials-page {
+            min-height: 100vh;
+            background-color: #000;
+            padding-top: 100px;
+        }
+        
+        .commercials-page-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem 2rem;
+        }
+        
+        .commercials-page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .commercials-page-subtitle {
+            font-size: 1rem;
+            color: #ccc;
+            letter-spacing: 2px;
+        }
+        
+        .commercials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 2rem;
+            padding: 0 3rem 4rem 3rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .commercial-item {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: #1a1a1a;
+            border-radius: 4px;
+        }
+        
+        .commercial-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .commercial-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            transition: all var(--transition);
+        }
+        
+        .commercial-item:hover .commercial-play-overlay {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .commercial-play-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            transition: transform var(--transition);
+        }
+        
+        .commercial-item:hover .commercial-play-icon {
+            transform: scale(1.1);
+        }
+        
+        .commercial-item.playing .commercial-play-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .commercial-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: #fff;
+        }
+        
+        .commercial-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+        
+        .commercial-brand {
+            font-size: 0.85rem;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 968px) {
+            .commercials-page {
+                padding-top: 70px;
+            }
+            
+            .commercials-page-header {
+                padding: 2rem 1.5rem 2rem 1.5rem;
+            }
+            
+            .commercials-page-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+            
+            .commercials-page-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+            }
+            
+            .commercials-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                padding: 0 1.5rem 3rem 1.5rem;
+                gap: 1.5rem;
+            }
+            
+            .commercial-title {
+                font-size: 0.95rem;
+            }
+            
+            .commercial-brand {
+                font-size: 0.75rem;
+            }
+            
+            .commercial-info {
+                padding: 1rem;
+            }
+            
+            .commercial-play-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .commercials-page {
+                padding-top: 60px;
+            }
+            
+            .commercials-page-header {
+                padding: 1.5rem 1rem 1.5rem 1rem;
+            }
+            
+            .commercials-page-title {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .commercials-page-subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .commercials-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem 2rem 1rem;
+                gap: 1rem;
+            }
+            
+            .commercial-title {
+                font-size: 0.85rem;
+            }
+            
+            .commercial-brand {
+                font-size: 0.7rem;
+            }
+            
+            .commercial-play-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .commercials-page-title {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .commercials-page-subtitle {
+                font-size: 0.7rem;
+            }
+            
+            .commercial-title {
+                font-size: 0.8rem;
+            }
+            
+            .commercial-brand {
+                font-size: 0.65rem;
+            }
+            
+            .commercial-info {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="nav-top-bar nav-dark">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">A|X</a>
+            </div>
+            
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="portfolio.html" class="nav-link">PORTFOLIO</a></li>
+                    <li><a href="commercials.html" class="nav-link active">COMMERCIALS</a></li>
+                    <li><a href="fitness.html" class="nav-link">FITNESS</a></li>
+                    <li><a href="index.html#contact" class="nav-link">CONTACT</a></li>
+                </ul>
+                
+                <div class="nav-social">
+                    <a href="https://www.instagram.com/marcofarris" target="_blank" class="nav-instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <nav class="mobile-menu-nav">
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
+            <a href="commercials.html" class="mobile-menu-link">Commercials</a>
+            <a href="fitness.html" class="mobile-menu-link">Fitness</a>
+            <a href="index.html#contact" class="mobile-menu-link">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Commercials Page Content -->
+    <section class="commercials-page">
+        <div class="commercials-page-header">
+            <h1 class="commercials-page-title">COMMERCIALS</h1>
+            <p class="commercials-page-subtitle">Brand Campaigns & Video Work</p>
+        </div>
+        
+        <div class="commercials-grid">
+            <div class="commercial-item">
+                <video playsinline muted loop>
+                    <source src="videos/commercial-1.mp4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">S. Oliver Campaign</h3>
+                    <p class="commercial-brand">S. OLIVER</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop>
+                    <source src="videos/commercial-2.mp4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Replay Denim</h3>
+                    <p class="commercial-brand">REPLAY</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop>
+                    <source src="videos/commercial-3.mp4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Intimissimi</h3>
+                    <p class="commercial-brand">INTIMISSIMI</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop>
+                    <source src="videos/commercial-4.mp4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Calzedonia</h3>
+                    <p class="commercial-brand">CALZEDONIA</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop>
+                    <source src="videos/commercial-5.mp4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Reebok</h3>
+                    <p class="commercial-brand">REEBOK</p>
+                </div>
+            </div>
+            
+            <div class="commercial-item">
+                <video playsinline muted loop>
+                    <source src="videos/commercial-6.mp4" type="video/mp4">
+                </video>
+                <div class="commercial-play-overlay">
+                    <div class="commercial-play-icon">▶</div>
+                </div>
+                <div class="commercial-info">
+                    <h3 class="commercial-title">Tezenis</h3>
+                    <p class="commercial-brand">TEZENIS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="footer-content">
+            <p>&copy; 2025 Marco Farris. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts-alexander.js"></script>
+    <script>
+        // Commercial video click-to-play
+        const commercialItems = document.querySelectorAll('.commercial-item');
+        
+        commercialItems.forEach(item => {
+            const video = item.querySelector('video');
+            
+            item.addEventListener('click', function() {
+                // Pause all other videos
+                commercialItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherVideo = otherItem.querySelector('video');
+                        if (otherVideo && !otherVideo.paused) {
+                            otherVideo.pause();
+                            otherItem.classList.remove('playing');
+                        }
+                    }
+                });
+                
+                // Toggle current video
+                if (video.paused) {
+                    video.play();
+                    item.classList.add('playing');
+                } else {
+                    video.pause();
+                    item.classList.remove('playing');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

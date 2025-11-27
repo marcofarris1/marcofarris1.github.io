@@ -347,6 +347,11 @@ button {
    HERO SECTION - CINEMATIC BLACK
    Fullscreen video from cinematic version
 ======================================== */
+/* Hide desktop hero on mobile */
+.hero-alexander {
+    display: none;
+}
+
 .hero-cinematic {
     position: relative;
     width: 100%;
@@ -505,7 +510,7 @@ button {
    GALLERY SECTION - EMBLA CAROUSEL
    ======================================== */
 .gallery-section {
-    padding: 3rem 0 2rem 0;
+    padding: 3rem 0 0.12rem 0; /* Reduced bottom padding by 94% total for mobile */
     background-color: #F2F2F2;
     overflow: hidden;
 }
@@ -898,7 +903,7 @@ button {
    Horizontal scrolling from reference
 ======================================== */
 .fitness-section {
-    padding: 6rem 0 4rem 0;
+    padding: 0.5rem 0 0.5rem 0; /* Minimal padding for mobile */
     background-color: #F2F2F2;
     overflow: hidden;
 }
@@ -1273,7 +1278,7 @@ button {
    Clean form from reference
 ======================================== */
 .contact-section {
-    padding: 8rem 3rem;
+    padding: 1rem 3rem; /* Much smaller top padding for mobile */
     background-color: #000000;
 }
 
@@ -1604,7 +1609,7 @@ button {
     }
     
     .embla__viewport {
-        height: 70vh;
+        height: 500px;
         overflow: hidden;
     }
     
@@ -1676,7 +1681,7 @@ button {
     
     .fitness-section {
         padding: 0;
-        min-height: 90vh;
+        min-height: 600px;
         display: flex;
         flex-direction: column;
         margin-bottom: 0;
@@ -1698,7 +1703,7 @@ button {
     }
     
     .embla--fitness .embla__viewport {
-        height: 70vh;
+        height: 500px;
         overflow: hidden;
         background-color: #F2F2F2;
         padding-top: 50px;
@@ -1987,7 +1992,7 @@ button {
         display: flex;
         flex-direction: column;
         padding: 8rem 4rem 4rem 4rem;
-        background-color: #0a0a0a !important;
+        background-color: #0a0a0a;
         z-index: 10;
     }
     
